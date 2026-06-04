@@ -169,6 +169,16 @@ git reset --hard HEAD
 git --no-pager diff --check：用来当安检员，看看代码里有没有带脏数据（冲突符号、乱七八糟的空格），有就直接报错拦截。
 git diff --name-only --diff-filter=U：用来当侦察兵，在 pull 翻车后，准确把所有冲突的文件名揪出来排排坐，展示给用户看。
 
+#### git 其它命令的妙用
+
+```shell
+# 取得今天当前分支你自己提交的最后一条 Commit Message 文本
+git log -1 --author="$(git config user.name)" --since="00:00:00" --format="%s"
+
+# 对比当前本地分支（HEAD）比远程追踪分支（Upstream）多了哪些提交
+git log @{u}..HEAD --since="00:00:00" --oneline
+```
+
 #### 最终的take命令清单
 
 ```shell
