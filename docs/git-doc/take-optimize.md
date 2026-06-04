@@ -18,4 +18,29 @@
 ? 是否坚持使用本次的新描述: [fix] ？
 [ ] 坚持用新的  [ ] 沿用上一次
 
+用到的命令有：
+
+```shell
+# 取得今天当前分支你自己提交的最后一条 Commit Message 文本
+git log -1 --author="$(git config user.name)" --since="00:00:00" --format="%s"
+
+# 对比当前本地分支（HEAD）比远程追踪分支（Upstream）多了哪些提交
+git log @{u}..HEAD --since="00:00:00" --oneline
+```
+
 #### 优化 take save
+
+git fetch 确实没必要，现实中别人提交的Commit Message与我一样的几乎不可能发生，属于无效操作。
+
+所以优化 take save 就是先判断远端（远端镜像）最后一条Commit Message是否与本最后一条Commit Message相同，
+相同就直接阻止并提交【远端已有 Commit Message “XXX” 了】
+
+用到的命令有：
+
+```shell
+# 抓取本地最新的 Commit Message
+git log -1 --format="%s" HEAD
+
+# 抓取远端（镜像缓存中）最新的 Commit Message
+git log -1 --format="%s" @{u}
+```

@@ -177,6 +177,12 @@ git log -1 --author="$(git config user.name)" --since="00:00:00" --format="%s"
 
 # 对比当前本地分支（HEAD）比远程追踪分支（Upstream）多了哪些提交
 git log @{u}..HEAD --since="00:00:00" --oneline
+
+# 抓取本地最新的 Commit Message
+git log -1 --format="%s" HEAD
+
+# 抓取远端（镜像缓存中）最新的 Commit Message
+git log -1 --format="%s" @{u}
 ```
 
 #### 最终的take命令清单
