@@ -169,6 +169,19 @@ git reset --hard HEAD
 git --no-pager diff --check：用来当安检员，看看代码里有没有带脏数据（冲突符号、乱七八糟的空格），有就直接报错拦截。
 git diff --name-only --diff-filter=U：用来当侦察兵，在 pull 翻车后，准确把所有冲突的文件名揪出来排排坐，展示给用户看。
 
+#### git 合并冲突预演
+
+```shell
+# 1. 最常用：预演当前分支与 origin/dev 合并的结果
+git merge-tree HEAD origin/dev
+
+# 2. 如果你想看更详细的信息（推荐）
+git merge-tree --write-tree HEAD origin/dev
+
+# 3. 想同时看到冲突信息更清晰的输出
+git merge-tree -z --write-tree HEAD origin/dev | cat
+```
+
 #### git 其它命令的妙用
 
 ```shell
